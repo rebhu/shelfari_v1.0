@@ -1,0 +1,46 @@
+<div id="head">
+<span id="titlehead">Bookshelf</span>
+<!--<span id ="searchbar">
+    <% form_tag books_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :title => nil, :author => nil %>
+     <% end %>
+<!--</span>-->
+<div id ="searchbar"><%= form_tag books_path, :method => "get" do %>
+  
+  <%= text_field_tag(:search,params[:search]) %>
+  <%= submit_tag "Search" , :title => nil, :author => nil%>
+<% end %>
+</div>
+<span id="newbook" onClick="opennew();">Add New Book to Shelf</span>
+</div>
+<div id="shelf">
+<% @books.each do |book| %>
+<div id="book">
+	<div id="title">
+	<%= book.title %>
+	<div id="link">
+    	<span id="linker" onClick="openframe(this);">
+	    	Edit 
+ 		   	<div id="open" class='frame'><iframe frameborder='0' src="<%= edit_book_path(book) %>" width="250px" height="300px" target="_parent"></iframe> </div> 
+ 		  </span>
+    <%= link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure to delete this?' } %>
+ </div>
+	</div>
+ <div id="author">by <%= book.author %></div>
+ Status:
+ <script language="javascript">
+ if(<%= book.read %>)
+ {
+ 	  document.write("Read");
+ }
+ else
+ {
+			document.write("Unread");
+ }
+ </script>
+ </div>
+<% end %>
+<div id="new" class='frame'><iframe frameborder='0' src="<%= new_book_path %>" width="250px" height="300px" target="_parent"></iframe> </div> 
+</div>
+<br />

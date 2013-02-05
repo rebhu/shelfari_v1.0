@@ -1,0 +1,7 @@
+<% if @books.empty? %>
+        <span>There were no results for your query</span><br/><br/>
+<% else %>
+<% for book in @books %>
+Result: <% book.title %>
+<% end %>
+<% end %>
